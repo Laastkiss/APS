@@ -1,0 +1,238 @@
+1. За дадена низа од случајни броеви кои се внесуваат од стандарден влез, 
+да се направи преместување на сите нули на почеток на низата. 
+На стандарден излез да се испечати трансформираната низа.
+
+import java.util.Scanner;
+
+public class PushZero {
+    static void pushZerosToBeginning(int arr[], int n) {
+        int count = 0;
+
+        // Преместете ги сите ненултелементи кон крајот на низата
+        for (int i = 0; i < n; i++) {
+            if (arr[i] != 0) {
+                arr[count] = arr[i];
+                count++;
+            }
+        }
+
+        // Пополнете ги преостанатите места со нули
+        while (count < n) {
+            arr[count] = 0;
+            count++;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Внесете го бројот на елементи во низата
+        System.out.print("Внесете го бројот на елементи во низата: ");
+        int n = scanner.nextInt();
+
+        int[] arr = new int[n];
+
+        // Внесете ги елементите на низата
+        System.out.println("Внесете ги елементите на низата:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        // Повик на функцијата за преместување на нулите на почеток
+        pushZerosToBeginning(arr, n);
+
+        // Испечатете ја трансформираната низа
+        System.out.println("Трансформираната низа:");
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
+
+import java.awt.font.FontRenderContext;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    static void pushZerosToBeginning(int arr[], int n) {
+        SLL<Integer> list = new SLL<>();
+        for (int i = 0; i < n; i++){
+            if(arr[i] == 0){
+                list.insertFirst(arr[i]);
+            }else{
+                list.insertLast(arr[i]);
+            }
+        }
+        System.out.println(list.toString());
+    }
+    public static void main(String[] args) {
+        int n;
+
+
+        Scanner s = new Scanner(System.in);
+
+        n = s.nextInt();
+        int arr[] = new int[n];
+        for (int i = 0; i < n; i++){
+            arr[i] = s.nextInt();
+        }
+
+        pushZerosToBeginning(arr, n);
+    }
+}
+
+2. За даден збор кој се внесува од стандарден влез, да се испечати истиот превртен. 
+На влез во првиот ред се дава број на зборови кои ќе се внесуваат. 
+Во наредните линии се внесуваат самите зборови.
+
+import java.util.Scanner;
+
+public class ReverseWord {
+
+    public static void printReversed(String word) {
+        StringBuilder reversed = new StringBuilder(word).reverse();
+        System.out.println(reversed.toString());
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        int numWords = scanner.nextInt(); // Вчитување на бројот на зборови
+
+        for (int i = 0; i < numWords; i++) {
+            String word = scanner.next(); // Вчитување на зборот
+            printReversed(word); // Печатење на превртениот збор
+        }
+
+        scanner.close(); // Затвори го Scanner
+    }
+}
+
+
+3. За потребите на софтвер за евиденција на приходите остварени од вработените во одделот за продажба, да се дефинира класа QuarterlySales во која се чуваат бројот на продажби остварени во одреден квартал, приходот добиен од секоја продажба и бројот на кварталот.
+
+Потоа, да се дефинира друга класа SalesPerson за кој се чува име (string) и низа од квартали (точно 4). За класите да се имплементираат соодветните конструктори и методи за правилно извршување на програмата. Да се имплементираат следните барања:
+
+• Метод int sumSales(SalesPerson sp) кој ќе врати сума од сите приходи остварени од дадениот вработен во одделот за продажба во сите квартали.
+
+• Метод SalesPerson salesChampion(SalesPerson [] arr) кој за дадената низа од работници ќе го врати работникот со најголем остварен приход (од сите квартали).
+
+• Да се дополни main методот во кој ќе се иницијализира низа од вработени во одделот за продажба и квартали согласно влезните тест примери. Во првиот ред се чита број на вработени, а понатаму прво во еден ред се чита името, па за секој квартал во еден ред бројот на продажби, и во следниот ред приходот добиен од секоја од тие продажби.
+
+• На стандарден излез да се испечати низата од вработени во одделот за продажба со помош на методата void table(SalesPerson [] arr) која за низата од вработени ќе отпечати приказ во следниот формат (за простор при печатење се користат три празни места):
+
+
+import java.util.Scanner;
+
+class QuarterlySales {
+    private int numOfSales;
+    private int[] revenues;
+    private int quarterNo;
+
+    public QuarterlySales(int numOfSales, int[] revenues, int quarterNo) {
+        this.numOfSales = numOfSales;
+        this.revenues = revenues;
+        this.quarterNo = quarterNo;
+    }
+
+    public int getQuarterNo() {
+        return quarterNo;
+    }
+
+    public int getTotalRevenue() {
+        int total = 0;
+        for (int revenue : revenues) {
+            total += revenue;
+        }
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        return "Quarter " + quarterNo + ": " + numOfSales + " sales, Total Revenue: " + getTotalRevenue();
+    }
+}
+
+class SalesPerson {
+    private String name;
+    private QuarterlySales[] quarters;
+
+    public SalesPerson(String name, QuarterlySales[] quarters) {
+        this.name = name;
+        this.quarters = quarters;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getTotalRevenue() {
+        int total = 0;
+        for (QuarterlySales quarter : quarters) {
+            total += quarter.getTotalRevenue();
+        }
+        return total;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Total Revenue: " + getTotalRevenue();
+    }
+}
+
+public class Main {
+
+    public static int sumSales(SalesPerson sp) {
+        int totalSales = 0;
+        for (QuarterlySales quarter : sp.quarters) {
+            totalSales += quarter.getTotalRevenue();
+        }
+        return totalSales;
+    }
+
+    public static SalesPerson salesChampion(SalesPerson[] arr) {
+        SalesPerson champion = arr[0];
+        for (SalesPerson sp : arr) {
+            if (sp.getTotalRevenue() > champion.getTotalRevenue()) {
+                champion = sp;
+            }
+        }
+        return champion;
+    }
+
+    public static void table(SalesPerson[] arr) {
+        for (SalesPerson sp : arr) {
+            System.out.println(sp);
+            for (QuarterlySales quarter : sp.quarters) {
+                System.out.println(quarter);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int n = input.nextInt();
+        SalesPerson[] arr = new SalesPerson[n];
+
+        for (int i = 0; i < n; i++) {
+            String name = input.next();
+            QuarterlySales[] quarters = new QuarterlySales[4];
+            for (int j = 0; j < 4; j++) {
+                int numOfSales = input.nextInt();
+                int[] revenues = new int[numOfSales];
+                for (int k = 0; k < numOfSales; k++) {
+                    revenues[k] = input.nextInt();
+                }
+                quarters[j] = new QuarterlySales(numOfSales, revenues, j + 1);
+            }
+            arr[i] = new SalesPerson(name, quarters);
+        }
+
+        table(arr);
+        System.out.println("SALES CHAMPION: " + salesChampion(arr).getName());
+    }
+}
+
+
+
